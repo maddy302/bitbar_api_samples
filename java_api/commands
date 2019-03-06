@@ -1,0 +1,2 @@
+maven - create a project
+mvn -B archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=com.bitbar.java_api -DartifactId=java_api_demo

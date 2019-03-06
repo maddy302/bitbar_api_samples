@@ -1,0 +1,8 @@
+{
+    "osType":"ANDROID",
+    "files_app":["app.apk"],
+    "files_test": ["test.apk"],
+    "frameworkId":252,
+    "deviceGroupId":39554,
+    "project_name":"JAVA API Demo"
+}
