@@ -42,8 +42,11 @@ public class PrepareProject {
 		//upload app
 		APIUserFile temp = me.uploadFile(new File(work_dir+"/"+prj_file.getFiles_app()[0]));
 		fileId.add(temp.getId());
-		temp = me.uploadFile(new File(work_dir+"/"+prj_file.getFiles_test()[0]));
-		fileId.add(temp.getId());
+		if(prj_file.getFiles_test()[0] !=null && !prj_file.getFiles_test()[0].isEmpty())
+		{
+			temp = me.uploadFile(new File(work_dir+"/"+prj_file.getFiles_test()[0]));
+			fileId.add(temp.getId());
+		}
 		
 		prj_file.setFile_ids(fileId.toArray(new Long[0]));
 		return prj_file;
@@ -59,7 +62,7 @@ public class PrepareProject {
 
 
 	public List<APIFileConfig> generate_APIFileConfigs() throws Exception {
-		// TODO Auto-generated method stub
+
 		List<APIFileConfig> list_file = new ArrayList<APIFileConfig>();
 		//for application
 		APIFileConfig app = new APIFileConfig(prj_file.getFile_ids()[0], APIFileConfig.Action.INSTALL);
@@ -72,7 +75,7 @@ public class PrepareProject {
 
 
 	public APITestRun createTestRun(APITestRunConfig test_run_config) throws APIException {
-		// TODO Auto-generated method stub
+
 		APITestRun test_run = me.startTestRun(test_run_config);
 		prj_file.setTest_run(test_run);
 		return test_run;
@@ -80,7 +83,6 @@ public class PrepareProject {
 
 
 	public void downloadLogs(APITestRun testrun) throws Exception {
-		// TODO Auto-generated method stub
 		
 		FileHandler x = new FileHandler();
 		APITestRun latest_run = x.pollForCompletion(prj, testrun.getId());

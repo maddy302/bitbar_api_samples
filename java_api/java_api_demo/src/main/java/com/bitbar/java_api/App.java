@@ -40,12 +40,16 @@ public class App
         	System.out.println(me);
 
         	FileHandler y = new FileHandler();
+        	
+        	//Prase json file
         	Project json = y.getFileAsJson(work_dir);
+        	
+        	//prepares a project by creating project, uploading application files - ready to start test runs.
         	PrepareProject prep = new PrepareProject(me,json, work_dir);
-        	//APIProject prj = me.createProject("JAVA API Demo");
         	json = prep.uploadFiles();
         	json = prep.createProject(json.getProject_name());
         	
+        	//setting up configuration for testrun
         	APITestRunConfig test_run_config = new APITestRunConfig();
         	
         	test_run_config.setProjectId(json.getProjectId());
@@ -60,15 +64,18 @@ public class App
         	test_run_config.setDeviceGroupId((long) json.getDeviceGroupId());
         	List<APIFileConfig> list_file_configs = prep.generate_APIFileConfigs();
         	test_run_config.setFiles(list_file_configs);
+        	
         	//running the test run with config
         	System.out.println("**** config ****"+json.toString());
+        	
+        	//create a test run
         	APITestRun testrun = prep.createTestRun(test_run_config);
         	System.out.println("**** Test run created ****");
         	System.out.println("Project : "+json.getProjectId() + " Test Run ID: "+testrun.getId() );
 
         	
         	//APIListResource<APIDeviceSession> device_sessions = testrun.getDeviceSessionsResource();
-        	
+        	//download the results
         	prep.downloadLogs(testrun);
         	
         }catch(Exception e)
