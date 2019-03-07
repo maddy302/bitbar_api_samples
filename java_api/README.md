@@ -27,12 +27,18 @@ Contents
     "project_name":"Java_API_FinalV1"
 }
 ```
-&nbsp;&nbsp;&nbsp;`osType` can be either one of ANDROID, IOS and DESKTOP
-&nbsp;&nbsp;&nbsp;`files_app` is the application name to be tested.
-&nbsp;&nbsp;&nbsp;`files_test` is the test package that is used to test the app.
-&nbsp;&nbsp;&nbsp;`frameworkId` please refer [documentation](http://docs.bitbar.com/testing/products/public.html)
-&nbsp;&nbsp;&nbsp;`deviceGroupId` is the device group against which you want to perform the tests. Can be found in the your cloud.bitbar account.
-&nbsp;&nbsp;&nbsp;`project_name` The name of the project you want to create.
+&nbsp;&nbsp;&nbsp;`osType` can be either one of ANDROID, IOS and DESKTOP<br />
+
+&nbsp;&nbsp;&nbsp;`files_app` is the application name to be tested.<br />
+
+&nbsp;&nbsp;&nbsp;`files_test` is the test package that is used to test the app.<br />
+
+&nbsp;&nbsp;&nbsp;`frameworkId` please refer [documentation](http://docs.bitbar.com/testing/products/public.html)<br />
+
+&nbsp;&nbsp;&nbsp;`deviceGroupId` is the device group against which you want to perform the tests. Can be found in the your cloud.bitbar account.<br />
+
+&nbsp;&nbsp;&nbsp;`project_name` The name of the project you want to create.<br />
+
 * `./java_api_demo/pm.xml` - to resolve dependecies 
 ```xml
     <dependency>
