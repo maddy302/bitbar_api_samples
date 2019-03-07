@@ -1,7 +1,7 @@
 Intro
 =====
 
-This is a project to demostrate the use of Testroid API to interact with https://cloud.bitbar.com to create a project, upload the application and test files, start a test run and collect the logs/results.
+This is a project to demostrate the use of Testroid API to interact with [https://cloud.bitbar.com] to create a project, upload the application and test files, start a test run and collect the logs/results.
 
 Documentation
 -------------
@@ -9,14 +9,14 @@ Documentation
 
 Pre-Reqs
 --------
-* [Java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) and [Maven](https://maven.apache.org/users/index.html) installed, preferrably latest versions.
-* The application, test package and a `config.json` in the same directory.
+*   [Java](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) and [Maven](https://maven.apache.org/users/index.html) installed, preferrably latest versions.
+*   The application, test package and a `config.json` in the same directory.
 
 Contents
 --------
-* `java_api_demo` - A maven project.
-* `app.apk` and `test.apk` - are the application and test package. The packages may vary according to the OS Type and framework type.
-* `config.json` - A configuration file used by the project to create testruns in bitbar cloud.
+*   `java_api_demo` - A maven project.
+*   `app.apk` and `test.apk` - are the application and test package. The packages may vary according to the OS Type and framework type.
+*   `config.json` - A configuration file used by the project to create testruns in bitbar cloud.
 ```json
 {
     "osType":"ANDROID",
@@ -39,7 +39,7 @@ Contents
 
 &nbsp;&nbsp;&nbsp;`project_name` The name of the project you want to create.<br />
 
-* `./java_api_demo/pm.xml` - to resolve dependecies 
+*   `./java_api_demo/pm.xml` - to resolve dependecies 
 ```xml
     <dependency>
       <groupId>com.testdroid</groupId>
@@ -57,9 +57,9 @@ Contents
 
 Run
 ---
-* From the directory of `pom.xml` run
+*   From the directory of `pom.xml` run
 ```sh
 mvn exec:java -Dexec.mainClass=com.bitbar.java_api.App -Dexec.args="<api_key> <work_dir>"
 ```
-* [api_key](https://cloud.bitbar.com/#user/my-account) is your secret token, work_dir is the directory where config.json is stored.
-* The results will be downloaded on successful completions in the work_dir.
+*   [api_key](https://cloud.bitbar.com/#user/my-account) is your secret token, work_dir is the directory where config.json is stored.
+*   The results will be downloaded on successful completions in the work_dir.

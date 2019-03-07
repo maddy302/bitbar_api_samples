@@ -17,6 +17,7 @@ import com.testdroid.api.model.APITestRun;
 
 public class FileHandler {
 
+	private
 	int default_wait_time = 60;
 	int time_out = 480;
 	

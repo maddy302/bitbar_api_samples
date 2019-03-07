@@ -1,21 +1,13 @@
 package com.bitbar.java_api;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.bitbar.file_handlers.FileHandler;
 import com.bitbar.model.PrepareProject;
 import com.bitbar.pojo.Project;
-import com.google.gson.GsonBuilder;
 import com.testdroid.api.APIKeyClient;
-import com.testdroid.api.APIListResource;
-import com.testdroid.api.DefaultAPIClient;
 import com.testdroid.api.model.APIDevice;
-import com.testdroid.api.model.APIDevice.OsType;
-import com.testdroid.api.model.APIDeviceSession;
 import com.testdroid.api.model.APIFileConfig;
-import com.testdroid.api.model.APIProject;
 import com.testdroid.api.model.APITestRun;
 import com.testdroid.api.model.APITestRunConfig;
 import com.testdroid.api.model.APIUser;
