@@ -17,9 +17,16 @@ import com.testdroid.api.model.APITestRun;
 
 public class FileHandler {
 
-	private
-	int default_wait_time = 60;
-	int time_out = 480;
+	//change these to increase the wait time, in seconds
+	public int default_wait_time = 60;
+	public int time_out = 480;
+	
+	/**
+	 * getFileAsJson
+	 * Given a json gives the Project pojo object
+	 * 
+	 * @param work_dir the directory containing config.json
+	 */
 	
 	public Project getFileAsJson(String work_dir) throws Exception
 	{
@@ -31,17 +38,22 @@ public class FileHandler {
 			BufferedReader file_buffer = new BufferedReader(new FileReader(work_dir+"/config.json"));
 			Project json = gson.fromJson(file_buffer, Project.class);
 			System.out.println(json.toString());
-			
-//			BufferedReader file_buffer = new BufferedReader(new FileReader("./src/main/java/com/bitbar/resources/config.json"));
-//			Project json = gson.fromJson(file_buffer, Project.class);
-//			System.out.println(json.toString());
-//			System.out.println(json.getClass());
-			
+						
 			return json;
 		}catch(Exception e){
 			throw e;
 		}
 	}
+	
+	
+	/**
+	 * dowloadStreamAsFile
+	 * Converts an InputStream to OutputStream with name device_testRun_results.zip
+	 * 
+	 * @param res - the device + testRun id
+	 * @param in - the InputStream to be converted
+	 * @param res_dir - The directory where results are downloaded
+	 */
 	
 	public boolean dowloadStreamAsFile(String res, InputStream in, String res_dir ) throws Exception
 	{
@@ -58,6 +70,16 @@ public class FileHandler {
 		
 		return false;
 	}
+	
+	/**
+	 * pollForCompletion - polls the bitbar cloud for time_out seconds every default_wait_time. Only when the status is 
+	 * Finished the results are downloaded.
+	 * @param x - The APIProject object
+	 * @param test_run_id
+	 * @return APITestRun with complete testrun details
+	 * @throws InterruptedException
+	 * @throws APIException
+	 */
 	
 	public APITestRun pollForCompletion(APIProject x, long test_run_id) throws InterruptedException, APIException
 	{

@@ -7,15 +7,16 @@ import com.testdroid.api.model.APIFileConfig;
 import com.testdroid.api.model.APITestRun;
 
 public class Project {
-	String osType;
-	long projectId;
-	int frameworkId, deviceGroupId;
-	String[] files_app;
-	String[] files_test;
-	Long[] file_ids;
-	APITestRun test_run;
-	List<APIFileConfig> file_configs;
-	String project_name;
+	
+	public String osType;
+	private long projectId;
+	private int frameworkId, deviceGroupId;
+	private String[] files_app;
+	private String[] files_test;
+	private Long[] file_ids;
+	private APITestRun test_run;
+	private List<APIFileConfig> file_configs;
+	private String project_name;
 	
 	public String getOsType() {
 		return osType;

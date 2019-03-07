@@ -17,12 +17,21 @@ import com.testdroid.api.model.APIUserFile;
 
 public class PrepareProject {
 
-	Project prj_file;
-	APIUser me;
-	APIProject prj;
-	int default_wait_time = 60;
-	int time_out = 600;
-	String work_dir = null;
+	
+	private Project prj_file;
+	private APIUser me;
+	private APIProject prj;
+	private int default_wait_time = 60;
+	private int time_out = 600;
+	private String work_dir = null;
+	
+	/**
+	 * PrepareProject - parameterized constructor.
+	 * @param me - APIUser
+	 * @param inp - Project pojo with basic information
+	 * @param work_dir
+	 * @throws Exception
+	 */
 	
 	public PrepareProject(APIUser me, Project inp, String work_dir) throws Exception
 	{
@@ -32,6 +41,11 @@ public class PrepareProject {
 		
 	}
 	
+	/**
+	 * uploadFiles - uploads the files to the bitbar cloud
+	 * 
+	 * @return Project with file ids.
+	 */
 	
 	public Project uploadFiles() throws Exception
 	{
@@ -50,6 +64,14 @@ public class PrepareProject {
 		return prj_file;
 	}
 	
+	/**
+	 * Creates a new project with name
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	
+	
 	public Project createProject(String name) throws Exception
 	{
 		prj = me.createProject(name);
@@ -58,6 +80,11 @@ public class PrepareProject {
 		return prj_file;
 	}
 
+	/**
+	 * Generates file configs for the project app and test file
+	 * @return List of APIFileConfig
+	 * @throws Exception
+	 */
 
 	public List<APIFileConfig> generate_APIFileConfigs() throws Exception {
 
@@ -72,6 +99,13 @@ public class PrepareProject {
 	}
 
 
+	/**
+	 * Create a new test run
+	 * @param test_run_config
+	 * @return
+	 * @throws APIException
+	 */
+	
 	public APITestRun createTestRun(APITestRunConfig test_run_config) throws APIException {
 
 		APITestRun test_run = me.startTestRun(test_run_config);
@@ -80,6 +114,11 @@ public class PrepareProject {
 	}
 
 
+	/**
+	 * Downloads the results for a gievn testrun
+	 * @param testrun
+	 * @throws Exception
+	 */
 	public void downloadLogs(APITestRun testrun) throws Exception {
 		
 		FileHandler x = new FileHandler();

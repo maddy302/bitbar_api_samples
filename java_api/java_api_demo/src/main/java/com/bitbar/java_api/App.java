@@ -13,12 +13,15 @@ import com.testdroid.api.model.APITestRunConfig;
 import com.testdroid.api.model.APIUser;
 
 /**
- * Hello world!
+ * A java maven project to demonstrate the use of testdroid java api
+ * 
+ * @author Madhukar
+ * @version 1.0 7 March 2019
  *
  */
 public class App 
 {
-	static String work_dir = null;
+	private static String work_dir = null;
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
