@@ -1,7 +1,7 @@
 Intro
 =====
 
-This is a project to demostrate the use of Testroid API to interact with [https://cloud.bitbar.com] to create a project, upload the application and test files, start a test run and collect the logs/results.
+This is a project to demostrate the use of Testroid API to interact with [https://cloud.bitbar.com](https://cloud.bitbar.com) to create a project, upload the application and test files, start a test run and collect the logs/results.
 
 Documentation
 -------------

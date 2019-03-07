@@ -52,15 +52,15 @@ public class PrepareProject {
 		List<Long> fileId = new ArrayList<Long>();
 		
 		//upload app
-		APIUserFile temp = me.uploadFile(new File(work_dir+"/"+prj_file.getFiles_app()[0]));
+		APIUserFile temp = me.uploadFile(new File(work_dir+"/"+prj_file.getFilesApp()[0]));
 		fileId.add(temp.getId());
-		if(prj_file.getFiles_test()[0] !=null && !prj_file.getFiles_test()[0].isEmpty())
+		if(prj_file.getFilesTest()[0] !=null && !prj_file.getFilesTest()[0].isEmpty())
 		{
-			temp = me.uploadFile(new File(work_dir+"/"+prj_file.getFiles_test()[0]));
+			temp = me.uploadFile(new File(work_dir+"/"+prj_file.getFilesTest()[0]));
 			fileId.add(temp.getId());
 		}
 		
-		prj_file.setFile_ids(fileId.toArray(new Long[0]));
+		prj_file.setFileIds(fileId.toArray(new Long[0]));
 		return prj_file;
 	}
 	
@@ -90,11 +90,11 @@ public class PrepareProject {
 
 		List<APIFileConfig> list_file = new ArrayList<APIFileConfig>();
 		//for application
-		APIFileConfig app = new APIFileConfig(prj_file.getFile_ids()[0], APIFileConfig.Action.INSTALL);
-		APIFileConfig test_package = new APIFileConfig(prj_file.getFile_ids()[1], APIFileConfig.Action.RUN_TEST);
+		APIFileConfig app = new APIFileConfig(prj_file.getFileIds()[0], APIFileConfig.Action.INSTALL);
+		APIFileConfig test_package = new APIFileConfig(prj_file.getFileIds()[1], APIFileConfig.Action.RUN_TEST);
 		list_file.add(app);
 		list_file.add(test_package);
-		prj_file.setFile_configs(list_file);
+		prj_file.setFileConfigs(list_file);
 		return list_file;
 	}
 
@@ -109,7 +109,7 @@ public class PrepareProject {
 	public APITestRun createTestRun(APITestRunConfig test_run_config) throws APIException {
 
 		APITestRun test_run = me.startTestRun(test_run_config);
-		prj_file.setTest_run(test_run);
+		prj_file.setTestRun(test_run);
 		return test_run;
 	}
 

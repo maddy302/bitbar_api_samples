@@ -42,7 +42,7 @@ public class App
         	//prepares a project by creating project, uploading application files - ready to start test runs.
         	PrepareProject prep = new PrepareProject(me,json, work_dir);
         	json = prep.uploadFiles();
-        	json = prep.createProject(json.getProject_name());
+        	json = prep.createProject(json.getProjectName());
         	
         	//setting up configuration for testrun
         	APITestRunConfig test_run_config = new APITestRunConfig();

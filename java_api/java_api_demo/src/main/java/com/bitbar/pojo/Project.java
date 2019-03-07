@@ -11,12 +11,20 @@ public class Project {
 	public String osType;
 	private long projectId;
 	private int frameworkId, deviceGroupId;
-	private String[] files_app;
-	private String[] files_test;
-	private Long[] file_ids;
-	private APITestRun test_run;
-	private List<APIFileConfig> file_configs;
-	private String project_name;
+	private String[] filesApp;
+	private String[] filesTest;
+	private Long[] fileIds;
+	private APITestRun testRun;
+	private List<APIFileConfig> fileConfigs;
+	private String projectName;
+	
+	@Override
+	public String toString() {
+		return "Project [osType=" + osType + ", projectId=" + projectId + ", frameworkId=" + frameworkId
+				+ ", deviceGroupId=" + deviceGroupId + ", filesApp=" + Arrays.toString(filesApp) + ", filesTest="
+				+ Arrays.toString(filesTest) + ", fileIds=" + Arrays.toString(fileIds) + ", testRun=" + testRun
+				+ ", fileConfigs=" + fileConfigs + ", projectName=" + projectName + "]";
+	}
 	
 	public String getOsType() {
 		return osType;
@@ -42,50 +50,42 @@ public class Project {
 	public void setDeviceGroupId(int deviceGroupId) {
 		this.deviceGroupId = deviceGroupId;
 	}
-	public String[] getFiles_app() {
-		return files_app;
+	public String[] getFilesApp() {
+		return filesApp;
 	}
-	public void setFiles_app(String[] files_app) {
-		this.files_app = files_app;
+	public void setFilesApp(String[] filesApp) {
+		this.filesApp = filesApp;
 	}
-	public String[] getFiles_test() {
-		return files_test;
+	public String[] getFilesTest() {
+		return filesTest;
 	}
-	public void setFiles_test(String[] files_test) {
-		this.files_test = files_test;
+	public void setFilesTest(String[] filesTest) {
+		this.filesTest = filesTest;
 	}
-	@Override
-	public String toString() {
-		return "Project [osType=" + osType + ", projectId=" + projectId + ", frameworkId=" + frameworkId
-				+ ", deviceGroupId=" + deviceGroupId + ", files_app=" + Arrays.toString(files_app) + ", files_test="
-				+ Arrays.toString(files_test) + ", file_ids=" + Arrays.toString(file_ids) + ", test_run=" + test_run
-				+ ", file_configs=" + file_configs + ", project_name=" + project_name + "]";
+	public Long[] getFileIds() {
+		return fileIds;
 	}
-	public Long[] getFile_ids() {
-		return file_ids;
+	public void setFileIds(Long[] fileIds) {
+		this.fileIds = fileIds;
 	}
-	public void setFile_ids(Long[] longs) {
-		this.file_ids = longs;
+	public APITestRun getTestRun() {
+		return testRun;
 	}
-	public APITestRun getTest_run() {
-		return test_run;
+	public void setTestRun(APITestRun testRun) {
+		this.testRun = testRun;
 	}
-	public void setTest_run(APITestRun test_run) {
-		this.test_run = test_run;
+	public List<APIFileConfig> getFileConfigs() {
+		return fileConfigs;
 	}
-	public List<APIFileConfig> getFile_configs() {
-		return file_configs;
+	public void setFileConfigs(List<APIFileConfig> fileConfigs) {
+		this.fileConfigs = fileConfigs;
 	}
-	public void setFile_configs(List<APIFileConfig> file_configs) {
-		this.file_configs = file_configs;
+	public String getProjectName() {
+		return projectName;
 	}
-	public String getProject_name() {
-		return project_name;
-	}
-	public void setProject_name(String project_name) {
-		this.project_name = project_name;
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 	
-	 
 
 }
