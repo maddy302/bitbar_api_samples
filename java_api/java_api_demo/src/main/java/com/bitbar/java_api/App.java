@@ -67,7 +67,7 @@ public class App
         	System.out.println("Project : "+json.getProjectId() + " Test Run ID: "+testrun.getId() );
 
         	
-        	APIListResource<APIDeviceSession> device_sessions = testrun.getDeviceSessionsResource();
+        	//APIListResource<APIDeviceSession> device_sessions = testrun.getDeviceSessionsResource();
         	
         	prep.downloadLogs(testrun);
         	
