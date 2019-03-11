@@ -18,28 +18,28 @@ import com.testdroid.api.model.APITestRun;
 public class FileHandler {
 
 	//change these to increase the wait time, in seconds
-	public int default_wait_time = 60;
-	public int time_out = 480;
+	public int defaultWaitTime = 60;
+	public int timeOut = 480;
 	
 	/**
-	 * getFileAsJson
+	 * parseFileAsJson
 	 * Given a json gives the Project pojo object
 	 * 
-	 * @param work_dir the directory containing config.json
+	 * @param configFileDir the directory containing config.json
 	 */
 	
-	public Project getFileAsJson(String work_dir) throws Exception
+	public Project parseJsonAsProject(String configFileDir) throws Exception
 	{
 		try
 		{
 			System.out.println(System.getProperty("user.dir"));
-			System.out.println("***Reading config.json at **** "+work_dir);
+			System.out.println("***Reading config.json at **** "+configFileDir);
 			Gson gson = new Gson();
-			BufferedReader file_buffer = new BufferedReader(new FileReader(work_dir+"/config.json"));
-			Project json = gson.fromJson(file_buffer, Project.class);
-			System.out.println(json.toString());
+			BufferedReader fileBuffer = new BufferedReader(new FileReader(configFileDir+"/config.json"));
+			Project jsonAsProject = gson.fromJson(fileBuffer, Project.class);
+			System.out.println(jsonAsProject.toString());
 						
-			return json;
+			return jsonAsProject;
 		}catch(Exception e){
 			throw e;
 		}
@@ -52,16 +52,16 @@ public class FileHandler {
 	 * 
 	 * @param res - the device + testRun id
 	 * @param in - the InputStream to be converted
-	 * @param res_dir - The directory where results are downloaded
+	 * @param resultsDir - The directory where results are downloaded
 	 */
 	
-	public boolean dowloadStreamAsFile(String res, InputStream in, String res_dir ) throws Exception
+	public boolean dowloadStreamAsFile(String res, InputStream in, String resultsDir ) throws Exception
 	{
-		String file_name = res+"results.zip";
+		String fileName = res+"results.zip";
 		OutputStream ostream = null;
-		File x = new File(res_dir);
-		x.mkdir();
-		ostream = new FileOutputStream(new File(x, file_name));
+		File results = new File(resultsDir);
+		results.mkdir();
+		ostream = new FileOutputStream(new File(results, fileName));
 		IOUtils.copy(in, ostream);
 		ostream.close();
 		
@@ -72,33 +72,33 @@ public class FileHandler {
 	}
 	
 	/**
-	 * pollForCompletion - polls the bitbar cloud for time_out seconds every default_wait_time. Only when the status is 
+	 * pollForCompletion - polls the bitbar cloud for timeOut seconds every defaultWaitTime. Only when the status is 
 	 * Finished the results are downloaded.
 	 * @param x - The APIProject object
-	 * @param test_run_id
+	 * @param testRunId
 	 * @return APITestRun with complete testrun details
 	 * @throws InterruptedException
 	 * @throws APIException
 	 */
 	
-	public APITestRun pollForCompletion(APIProject x, long test_run_id) throws InterruptedException, APIException
+	public APITestRun pollForCompletion(APIProject apiPrj, long testRunId) throws InterruptedException, APIException
 	{
 		
-		int time_elapsed = 0;
+		int timeElapsed = 0;
 		while(true)
 		{
-			APITestRun testrun = x.getTestRun(test_run_id);
+			APITestRun testrun = apiPrj.getTestRun(testRunId);
 			if(testrun.getState().equals(APITestRun.State.FINISHED))
 			{
-				System.out.println("Testrun "+test_run_id+" : Finished");
+				System.out.println("Testrun "+testRunId+" : Finished");
 				return testrun;
 			}
-			Thread.sleep(default_wait_time * 1000);
-			time_elapsed = time_elapsed + default_wait_time;
-			System.out.println("Time elapsed in sec: "+ time_elapsed);
-			if(time_elapsed > time_out)
+			Thread.sleep(defaultWaitTime * 1000);
+			timeElapsed = timeElapsed + defaultWaitTime;
+			System.out.println("Time elapsed in sec: "+ timeElapsed);
+			if(timeElapsed > timeOut)
 			{
-				System.out.println("Time out when waiting for the run to complete " + time_out + "seconds");
+				System.out.println(String.format("Time out when waiting for the run to complete %d seconds" , timeOut));
 				return null;
 			}
 			else

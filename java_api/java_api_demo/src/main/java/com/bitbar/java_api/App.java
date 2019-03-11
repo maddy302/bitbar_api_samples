@@ -3,7 +3,7 @@ package com.bitbar.java_api;
 import java.util.List;
 
 import com.bitbar.file_handlers.FileHandler;
-import com.bitbar.model.PrepareProject;
+import com.bitbar.model.ProjectModel;
 import com.bitbar.pojo.Project;
 import com.testdroid.api.APIKeyClient;
 import com.testdroid.api.model.APIDevice;
@@ -21,55 +21,51 @@ import com.testdroid.api.model.APIUser;
  */
 public class App 
 {
-	private static String work_dir = null;
+	private static String configFileDir = null;
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        String cloud_url = "https://cloud.bitbar.com/";
-        String api_key = args[0];
-        work_dir = args[1];
+        String cloudUrl = "https://cloud.bitbar.com/";
+        String apiKey = args[0];
+        configFileDir = args[1];
         
         try {
-        	APIKeyClient api_instance = new APIKeyClient(cloud_url, api_key);
-        	APIUser me = api_instance.me();
+        	APIKeyClient apiInstance = new APIKeyClient(cloudUrl, apiKey);
+        	APIUser me = apiInstance.me();
         	System.out.println(me);
 
         	FileHandler y = new FileHandler();
         	
         	//Prase json file
-        	Project json = y.getFileAsJson(work_dir);
+        	Project projectPojo = y.parseJsonAsProject(configFileDir);
         	
         	//prepares a project by creating project, uploading application files - ready to start test runs.
-        	PrepareProject prep = new PrepareProject(me,json, work_dir);
-        	json = prep.uploadFiles();
-        	json = prep.createProject(json.getProjectName());
+        	ProjectModel prep = new ProjectModel(me,projectPojo, configFileDir);
+        	projectPojo = prep.uploadFiles();
+        	projectPojo = prep.createProject(projectPojo.getProjectName());
         	
         	//setting up configuration for testrun
-        	APITestRunConfig test_run_config = new APITestRunConfig();
+        	APITestRunConfig testRunConfig = new APITestRunConfig();
         	
-        	test_run_config.setProjectId(json.getProjectId());
-        	if(json.getOsType().equalsIgnoreCase("android"))
-        		test_run_config.setOsType(APIDevice.OsType.ANDROID);
-        	else if(json.getOsType().equalsIgnoreCase("ios"))
-        		test_run_config.setOsType(APIDevice.OsType.IOS);
-        	else if(json.getOsType().equalsIgnoreCase("desktop"))
-        		test_run_config.setOsType(APIDevice.OsType.DESKTOP);
+        	testRunConfig.setProjectId(projectPojo.getProjectId());
+        	if(projectPojo.getOsType().equalsIgnoreCase("desktop"))
+        		testRunConfig.setOsType(APIDevice.OsType.DESKTOP);
+        	else if(projectPojo.getOsType().equalsIgnoreCase("ios"))
+        		testRunConfig.setOsType(APIDevice.OsType.IOS);
+        	else
+        		testRunConfig.setOsType(APIDevice.OsType.ANDROID);
         	
-        	test_run_config.setFrameworkId((long) json.getFrameworkId());
-        	test_run_config.setDeviceGroupId((long) json.getDeviceGroupId());
-        	List<APIFileConfig> list_file_configs = prep.generate_APIFileConfigs();
-        	test_run_config.setFiles(list_file_configs);
+        	testRunConfig.setFrameworkId((long) projectPojo.getFrameworkId());
+        	testRunConfig.setDeviceGroupId((long) projectPojo.getDeviceGroupId());
+        	List<APIFileConfig> listFileConfigs = prep.generateAPIFileConfigs();
+        	testRunConfig.setFiles(listFileConfigs);
         	
-        	//running the test run with config
-        	System.out.println("**** config ****"+json.toString());
+        	System.out.println("**** config ****"+projectPojo.toString());
         	
         	//create a test run
-        	APITestRun testrun = prep.createTestRun(test_run_config);
+        	APITestRun testrun = prep.createTestRun(testRunConfig);
         	System.out.println("**** Test run created ****");
-        	System.out.println("Project : "+json.getProjectId() + " Test Run ID: "+testrun.getId() );
-
+        	System.out.println(String.format("Project :  %d Test Run ID: %d", projectPojo.getProjectId(), testrun.getId() ));
         	
-        	//APIListResource<APIDeviceSession> device_sessions = testrun.getDeviceSessionsResource();
         	//download the results
         	prep.downloadLogs(testrun);
         	
