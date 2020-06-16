@@ -1,0 +1,2 @@
+# bitbar_api_samples
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f82d0c813dd84fe4ac0dc0911eca0697)](https://app.codacy.com/app/maddy302/bitbar_api_samples?utm_source=github.com&utm_medium=referral&utm_content=maddy302/bitbar_api_samples&utm_campaign=Badge_Grade_Dashboard)
